@@ -1,0 +1,6 @@
+streamlit
+pyyaml
+xmltodict
+snowflake-snowpark-python
+pandas
+plotly
