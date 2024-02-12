@@ -5,7 +5,7 @@ All source code for my new **"JSON in Snowflake Masterclass 2024 Hands-On!"** Ud
 ## Demo Project Setup
 
 * **Install and configure Visual Studio Code (VSCode)**
-* **Install VSCode extension for Snowflake**
+* **Install the VSCode extension for Snowflake**
 * **Clone this GitHub Repository**
 
 **`git clone https://github.com/cristiscu/json-in-snowflake.git`**
