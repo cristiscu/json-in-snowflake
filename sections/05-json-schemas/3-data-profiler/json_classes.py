@@ -1,21 +1,11 @@
-"""
-Created By:    Cristian Scutaru
-Creation Date: Sep 2023
-Company:       XtractPro Software
-"""
-
-from config import Config
-
-# ==========================================================================
 class JsonManager:
     obj_id = 1
-
-    def __new__(cls):
-        raise TypeError("This is a static class and cannot be instantiated.")
+    single_object=True
 
     @classmethod
-    def inferSchema(cls, data) -> str:     
+    def inferSchema(cls, data, single_object) -> str:     
         cls.obj_id = 1
+        cls.single_object = single_object
         return Obj(data) if isinstance(data, dict) else Arr(data)
 
     @classmethod
@@ -24,7 +14,6 @@ class JsonManager:
     @classmethod
     def getIndent(cls, level) -> str: return "   " * level
 
-# ==========================================================================
 class Val:
     def __init__(self, val, level=0) -> None:
         self.level = level
@@ -64,13 +53,13 @@ class Val:
 
     def _dumpVals(self):
         s = ''; i = 0
-        for val in self.vals[0:Config.max_values+1]:
-            if i >= Config.max_values: s += ", ..."
+        for val in self.vals[0:4]:
+            if i >= 3: s += ", ..."
             else:
                 if isinstance(val, str):
                     val = str(val).replace("\n", " ")
-                    if len(str(val)) > Config.str_truncate:
-                        val = f'{str(val)[:Config.str_truncate]}...'
+                    if len(str(val)) > 20:
+                        val = f'{str(val)[:20]}...'
                 s += f'{", " if len(s) > 0 else ""}{val}'
             i += 1
         return s
@@ -78,8 +67,8 @@ class Val:
     def dump(self, last=True, lastVal=False):
         if self.isPrimitive():
             s = "" if last else ", "
-            counts = "" if not Config.show_counts else f' ({len(self.vals)})'
-            samples = "" if not Config.show_samples else f': {self._dumpVals()}'
+            counts = f' ({len(self.vals)})'
+            samples = f': {self._dumpVals()}'
             return f'"{self.type}{counts}{samples}"{s}'
         else:
             v = self.val.dump(last, lastVal)
@@ -88,7 +77,6 @@ class Val:
             else:
                 return f'\n{v}'
 
-# ==========================================================================
 class Prop:
     def __init__(self, key, val, level=0) -> None:
         self.level = level
@@ -99,7 +87,7 @@ class Prop:
 
     def getName(self):
         req = "" if self.req else "*"
-        counts = "" if not Config.show_counts else f' ({self.count})'
+        counts = f' ({self.count})'
         return f'"{self.key}{req}{counts}"'
 
     def dumpProp(self, last=True, lastVal=False):
@@ -112,7 +100,6 @@ class Prop:
                 and (self.val.val.hasPrimitives() or self.val.val.hasSingleProp()))
         return f'{JsonManager.getIndent(self.level)}{self.dumpProp(last, lastVal)}{suffix}'
 
-# ==========================================================================
 class Obj:
     def __init__(self, obj, level=0) -> None:
         self.level = level
@@ -143,7 +130,6 @@ class Obj:
         s += f'{JsonManager.getIndent(self.level)}}}{comma}\n'
         return s
 
-# ==========================================================================
 class Arr:
     def __init__(self, arr, level=0) -> None:
         self.level = level
@@ -160,7 +146,7 @@ class Arr:
                 self._processArrObj(elem, level)
 
     def _processArrObj(self, elem, level):
-        if Config.single_object:
+        if JsonManager.single_object:
             self._updateObject(elem, level)
         else:
             inst = self._hasSameKeys(elem)
