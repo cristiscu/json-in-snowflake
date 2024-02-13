@@ -14,7 +14,7 @@ if uploaded_file is not None:
     bytes = uploaded_file.getvalue()
     raw = StringIO(bytes.decode("utf-8")).read()
 else:
-    with open("../../../data-in/test.json") as f:
+    with open("../../../data/test.json") as f:
         raw = f.read()
 
 tabSource, tabSchemaSingle, tabSchemaMulti \

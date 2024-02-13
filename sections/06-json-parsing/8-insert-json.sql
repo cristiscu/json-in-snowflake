@@ -30,3 +30,22 @@ create or replace table insert_json(id int, v variant)
 as select $1, parse_json($2)
 from values (1, '{ "key": "value" }');
 
+-- updates
+-- see https://docs.snowflake.com/en/sql-reference/data-types-semistructured#label-data-type-object
+UPDATE insert_json
+SET v = { 'Alberta': 'Edmonton' , 'Manitoba': 'Winnipeg' }
+WHERE id = 1;
+
+UPDATE insert_json
+SET v = OBJECT_CONSTRUCT('Alberta', 'Edmonton', 'Manitoba', 'Winnipeg')
+WHERE id = 1;
+
+-- this will also work (auto-cast string to OBJECT!)
+UPDATE insert_json
+SET v = '{ "Alberta": "Edmonton" , "Manitoba": "Winnipeg" }'
+WHERE id = 1;
+
+-- returns OBJECT, Edmonton, Edmonton, null
+SELECT typeof(v), v:Alberta, v:"Alberta", v:alberta
+FROM insert_json
+WHERE id = 1;

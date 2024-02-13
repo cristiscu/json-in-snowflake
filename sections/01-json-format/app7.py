@@ -5,7 +5,7 @@ import json2xml, json2yaml
 
 st.title("Simple Semi-Structured Data Viewer")
 
-filename = "../../data-in/store.json"
+filename = "../../data/store.json"
 with open(filename) as fin:
     data = json.load(fin)
 
