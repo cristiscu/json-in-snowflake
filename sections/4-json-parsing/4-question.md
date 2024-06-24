@@ -27,7 +27,7 @@ from values ('{ "id": 123 }')));
 ```
 
 **Answer:**
-A) returns a string, not an OBJECT. We need OBJECT_CONTRUCT for this.
+A) returns a string, not an OBJECT. We need OBJECT_CONSTRUCT for this.
 B) also returns a string (from concatenation with correctly parsed JSON), not an OBJECT
 C) returns an OBJECT, but as { "123": "id" }, not { "id": 123 }.
 D) is the ony query that returns the required Snowflake OBJECT, properly generated with OBJECT_CONSTRUCT.
