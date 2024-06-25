@@ -1,16 +1,14 @@
 import streamlit as st
-import json, os
+import json
 from snowflake.snowpark import Session
+from snowflake.ml.utils.connection_params import SnowflakeLoginOptions
 
 st.title("Simple JSON Viewer")
 
-pars = {
-    "account": 'FHB91278',
-    "user": 'cristiscu',
-    "password": os.environ['SNOWSQL_PWD']}
+pars = SnowflakeLoginOptions("test_conn")
 session = Session.builder.configs(pars).create()
 
-query = 'select top 1 products from test.public.store'
+query = 'table test.public.store'
 query = st.sidebar.text_area('Query:', value=query)
 
 rows = session.sql(query).collect()

@@ -1,10 +1,11 @@
+# paste and run in a Streamit in Snowflake app
 import json
 import streamlit as st
 from snowflake.snowpark.context import get_active_session
 
 st.title("Simple JSON Viewer")
 
-query = 'select top 1 products from test.public.store'
+query = 'table test.public.store'
 query = st.sidebar.text_area('Query:', value=query)
 
 rows = get_active_session().sql(query).collect()
