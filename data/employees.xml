@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<employee>
+  <id>100</id>
+  <name>Steven King</name>
+  <phone>(515) 123-4567</phone>
+  <hiredate>2003-06-17</hiredate>
+  <salary>24000</salary>
+  <job>PRESIDENT</job>
+  <department>PRESIDENCE</department>
+  <employees>
+    <employee>
+      <id>101</id>
+      <name>Neena Kochhar</name>
+      <phone>(515) 123-4568</phone>
+      <hiredate>2003-06-17</hiredate>
+      <salary>17000</salary>
+      <job>VP</job>
+      <department>PRESIDENCE</department>
+      <employees>
+        <employee>
+          <id>204</id>
+          <name>Hermann Baer</name>
+          <phone>(515) 123-8888</phone>
+          <hiredate>2004-06-07</hiredate>
+          <salary>10000</salary>
+          <job>SALES REP</job>
+          <department>SALES</department>
+        </employee>
+        <employee>
+          <id>205</id>
+          <name>Shelley Higgins</name>
+          <phone>(515) 123-8080</phone>
+          <hiredate>2004-06-07</hiredate>
+          <salary>12000</salary>
+          <job>CONTROLLER</job>
+          <department>FINANCE</department>
+        </employee>
+        <employee>
+          <id>108</id>
+          <name>Nancy Greenberg</name>
+          <phone>(515) 124-4569</phone>
+          <hiredate>2006-01-03</hiredate>
+          <salary>12000</salary>
+          <job>MANAGER</job>
+          <department>FINANCE</department>
+          <employees>
+            <employee>
+              <id>111</id>
+              <name>Ismael Sciarra</name>
+              <phone>(515) 124-4369</phone>
+              <hiredate>2007-09-30</hiredate>
+              <salary>7700</salary>
+              <job>ACCOUNTANT</job>
+              <department>FINANCE</department>
+            </employee>
+            <employee>
+              <id>112</id>
+              <name>Jose Manuel Urman</name>
+              <phone>(515) 124-4469</phone>
+              <hiredate>2006-03-07</hiredate>
+              <salary>7800</salary>
+              <job>ACCOUNTANT</job>
+              <department>FINANCE</department>
+            </employee>
+            <employee>
+              <id>113</id>
+              <name>Luis Popp</name>
+              <phone>(515) 124-4567</phone>
+              <hiredate>2007-05-21</hiredate>
+              <salary>6900</salary>
+              <job>ACCOUNTANT</job>
+              <department>FINANCE</department>
+            </employee>
+          </employees>
+        </employee>
+      </employees>
+    </employee>
+    <employee>
+      <id>102</id>
+      <name>Lex De Haan</name>
+      <phone>(515) 123-4569</phone>
+      <hiredate>2003-06-17</hiredate>
+      <salary>17000</salary>
+      <job>VP</job>
+      <department>PRESIDENCE</department>
+      <employees>
+        <employee>
+          <id>103</id>
+          <name>Alexander Hunold</name>
+          <phone>(590) 423-4567</phone>
+          <hiredate>2006-01-03</hiredate>
+          <salary>9000</salary>
+          <job>PROGRAMMER</job>
+          <department>IT</department>
+          <employees>
+            <employee>
+              <id>104</id>
+              <name>Bruce Ernst</name>
+              <phone>(590) 423-4568</phone>
+              <hiredate>2007-05-21</hiredate>
+              <salary>6000</salary>
+              <job>PROGRAMMER</job>
+              <department>IT</department>
+            </employee>
+            <employee>
+              <id>106</id>
+              <name>Valli Pataballa</name>
+              <phone>(590) 423-4560</phone>
+              <hiredate>2007-05-21</hiredate>
+              <salary>4800</salary>
+              <job>PROGRAMMER</job>
+              <department>IT</department>
+            </employee>
+          </employees>
+        </employee>
+      </employees>
+    </employee>
+    <employee>
+      <id>114</id>
+      <name>Den Raphaely</name>
+      <phone>(515) 127-4561</phone>
+      <hiredate>2003-06-17</hiredate>
+      <salary>11000</salary>
+      <job>MANAGER</job>
+      <department>ANALYTICS</department>
+      <employees>
+        <employee>
+          <id>115</id>
+          <name>Alexander Khoo</name>
+          <phone>(515) 127-4562</phone>
+          <hiredate>2005-12-24</hiredate>
+          <salary>3100</salary>
+          <job>CLERK</job>
+          <department>ANALYTICS</department>
+        </employee>
+        <employee>
+          <id>116</id>
+          <name>Shelli Baida</name>
+          <phone>(515) 127-4563</phone>
+          <hiredate>2005-12-24</hiredate>
+          <salary>2900</salary>
+          <job>CLERK</job>
+          <department>ANALYTICS</department>
+        </employee>
+      </employees>
+    </employee>
+    <employee>
+      <id>121</id>
+      <name>Adam Fripp</name>
+      <phone>(650) 123-2234</phone>
+      <hiredate>2003-06-17</hiredate>
+      <salary>8200</salary>
+      <job>MANAGER</job>
+      <department>DOCUMENTATION</department>
+      <employees>
+        <employee>
+          <id>129</id>
+          <name>Laura Bissot</name>
+          <phone>(650) 124-5234</phone>
+          <hiredate>2004-06-07</hiredate>
+          <salary>3300</salary>
+          <job>CLERK</job>
+          <department>DOCUMENTATION</department>
+        </employee>
+      </employees>
+    </employee>
+  </employees>
+</employee>

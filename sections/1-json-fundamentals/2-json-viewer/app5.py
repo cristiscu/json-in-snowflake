@@ -1,11 +1,10 @@
 import json
 import streamlit as st
 from io import StringIO
-import json2xml, json2yaml
 
-st.title("Simple Semi-Structured Data Viewer")
+st.title("Simple JSON Data Viewer")
 
-filename = "../../data/store.json"
+filename = "../../../data/store.json"
 with open(filename) as fin:
     data = json.load(fin)
 
@@ -15,12 +14,7 @@ if uploaded_file is not None:
     content = StringIO(uploaded_file.getvalue().decode("utf-8"))
     data = json.load(content)
 
-tabJson, tabXml, tabYaml = st.tabs(["JSON", "XML", "YAML"])
+tabJson, tabJsonViewer = st.tabs(["JSON", "JSON Viewer"])
 jsn = json.dumps(data, indent=2)
 tabJson.code(jsn, language='json')
-
-xml = json2xml.getXml(data)
-tabXml.code(xml, language='xml')
-
-yaml = json2yaml.getYaml(data)
-tabYaml.code(yaml, language='yaml')
+tabJsonViewer.json(jsn)

@@ -4,3 +4,5 @@ xmltodict
 snowflake-snowpark-python
 pandas
 plotly
+pyvis
+scipy
