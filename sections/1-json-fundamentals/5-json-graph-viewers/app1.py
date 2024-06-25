@@ -10,8 +10,8 @@ def getLinks(node, s=""):
 import json
 with open("../../../data/employees.json") as fin:
     root = json.load(fin)
-
 dot = f"digraph {{\n{getLinks(root)}}}"
+print(dot)
 
 import webbrowser, urllib.parse
 url = f'http://magjac.com/graphviz-visual-editor/?dot={urllib.parse.quote(dot)}'

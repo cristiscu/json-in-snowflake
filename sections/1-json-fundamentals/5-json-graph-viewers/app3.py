@@ -1,5 +1,5 @@
 # keep only name-children keys
-def cleanTree(node, labels=[], parents=[]):
+def simplify(node, labels=[], parents=[]):
     del node["id"]
     del node["phone"]
     del node["hiredate"]
@@ -8,15 +8,17 @@ def cleanTree(node, labels=[], parents=[]):
     del node["department"]
     if "employees" in node:
         for child in node["employees"]:
-            cleanTree(child)
+            simplify(child)
         node["children"] = node.pop("employees")
 
 
 import json
 with open("../../../data/employees.json") as fin:
     root = json.load(fin)
-cleanTree(root)
-jsn = json.dumps(root, indent=4)
+simplify(root)
+jsn = json.dumps(root, indent=2)
+with open("../../../data/employees-simplified.json", "w") as f:
+    f.writelines(json)
 
 with open("templates/collapsible-tree.html", "r") as file:
     content = file.read()
