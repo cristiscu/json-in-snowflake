@@ -17,6 +17,12 @@ as select 1, { "key": "value" };
 create or replace table insert_json(id int, v variant)
 as select 1, parse_json('{ "key": "value" }');
 
+-- this will work (w/ CTAS, for large copied JSON content)
+create or replace table insert_json(id int, v variant)
+as select 1, parse_json($$
+{ "key": "value" }
+$$);
+
 -- this will work (w/ CTAS + VALUES)
 create or replace table insert_json(id int, v variant)
 as select $1, parse_json($2)
