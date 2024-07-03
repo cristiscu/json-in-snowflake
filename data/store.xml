@@ -1,0 +1,32 @@
+<store>
+    <book>
+        <category>reference</category>
+        <title>Sayings of the Century</title>
+        <author>Nigel Rees</author>
+        <price>8.95</price>
+    </book>
+    <book>
+        <category>fiction</category>
+        <title>Sword of Honour</title>
+        <author>Evelyn Waugh</author>
+        <price>12.99</price>
+    </book>
+    <book>
+        <category>fiction</category>
+        <title>Moby Dick</title>
+        <author>Herman Melville</author>
+        <price>8.99</price>
+        <isbn>0-553-21311-3</isbn>
+    </book>
+    <book>
+        <category>fiction</category>
+        <title>The Lord of the Rings</title>
+        <author>J. R. R. Tolkien</author>
+        <price>22.99</price>
+        <isbn>0-395-19395-8</isbn>
+    </book>
+    <bicycle>
+        <color>red</color>
+        <price>19.95</price>
+    </bicycle>
+</store>

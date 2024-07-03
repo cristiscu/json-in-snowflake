@@ -1,3 +1,4 @@
+-- TODO: remove and use separatelly, w/ XML file in parallel
 -- see https://medium.com/snowflake/convert-xpath-and-jsonpath-expressions-to-snowflake-queries-e34ca15bfa6b
 USE SCHEMA test.public;
 
