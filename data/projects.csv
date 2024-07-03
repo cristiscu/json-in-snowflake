@@ -1,0 +1,7 @@
+PROJECT_NAME,PROJECT_ID,PROJECT_STATUS
+Requirements,1,completed
+Analysis,2,completed
+Design,3,in_progress
+Implementation,4,in_progress
+Test,5,not_started
+Maintenance,6,not_started
