@@ -13,12 +13,9 @@ create or replace table emp (
 
 insert into emp
 select 1, 'John', 1, ARRAY_CONSTRUCT('IT', 'Prod')
-union
-select 2, 'Mary', 1, ARRAY_CONSTRUCT('PS', 'Prod Support')
-union
-select 3, 'Bob', 2, null
-union
-select 4, 'Jack', null, null;
+union select 2, 'Mary', 1, ARRAY_CONSTRUCT('PS', 'Prod Support')
+union select 3, 'Bob', 2, null
+union select 4, 'Jack', null, null;
 
 -- =================================================================
 
