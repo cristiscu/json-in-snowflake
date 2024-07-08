@@ -1,3 +1,6 @@
+# JSON Data Profiler as a Live Streamlit Web App
+# see https://medium.com/snowflake/json-data-profiler-as-a-live-streamlit-web-app-54096b00a615
+
 import json
 import streamlit as st
 from io import StringIO
