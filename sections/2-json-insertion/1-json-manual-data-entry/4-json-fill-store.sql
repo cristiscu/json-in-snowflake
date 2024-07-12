@@ -1,9 +1,7 @@
--- TODO: remove and use separatelly, w/ XML file in parallel
--- see https://medium.com/snowflake/convert-xpath-and-jsonpath-expressions-to-snowflake-queries-e34ca15bfa6b
-USE SCHEMA test.public;
-
-CREATE OR REPLACE TABLE store(v VARIANT) AS
-  SELECT '{ "store": {
+CREATE OR REPLACE TABLE test.public.store2(v VARIANT)
+AS SELECT $$
+{
+  "store": {
     "book": [ 
       { "category": "reference",
         "author": "Nigel Rees",
@@ -33,4 +31,7 @@ CREATE OR REPLACE TABLE store(v VARIANT) AS
       "price": 19.95
     }
   }
-}';
+}
+$$;
+
+table test.public.store2;

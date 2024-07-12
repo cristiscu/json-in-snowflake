@@ -1,5 +1,4 @@
 -- array creation
--- (beware this will show array of strings no matter what in VSCode!)
 use schema test.public;
 
 SELECT '[1, 2, 3]', array_construct(1, 2, 3), parse_json('[1, 2, 3]');
@@ -10,4 +9,4 @@ SELECT * FROM arrays1;
 
 -- all ARRAY!
 SELECT typeof($1), typeof(arr2), typeof(arr3)
-FROM multi_arrays3;
+FROM arrays1;
