@@ -1,4 +1,4 @@
--- UPDATE JSON data
+-- UPDATE JSON data (not in-place!)
 -- see https://docs.snowflake.com/en/sql-reference/data-types-semistructured#label-data-type-object
 use schema test.public;
 

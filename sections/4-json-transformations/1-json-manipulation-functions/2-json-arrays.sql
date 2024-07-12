@@ -35,6 +35,7 @@ select ARRAY_CONSTRUCT(2, 4, null, 6, 4) arr,
     ARRAY_DISTINCT(arr),
     ARRAY_SORT(arr);
 
+-- =========================================================
 -- flatten array elements
 select ARRAY_CONSTRUCT([2, [4], null], [6, 4]) arr,
     ARRAY_FLATTEN(arr),
@@ -49,13 +50,3 @@ select ARRAY_CONSTRUCT([2, [4], null], [6, 4]) arr,
     f2.value
 from table(flatten(arr)) f1,
     table(flatten(f1.value)) f2;
-
-
-
-
-select ARRAY_CONSTRUCT(2, null, 2) arr1,
-    ARRAY_CONSTRUCT(null, 1) arr2,
-	ARRAY_CAT(arr1, arr2),
-    ARRAY_EXCEPT(arr1, arr2),
-	ARRAY_INTERSECTION(arr1, arr2),
-	ARRAYS_OVERLAP(arr1, arr2);
