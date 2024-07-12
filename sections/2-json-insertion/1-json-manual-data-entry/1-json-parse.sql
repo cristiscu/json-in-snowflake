@@ -22,7 +22,10 @@ select parse_json($1)
 from values ('{ "key": "value" }');
 
 -- this will work (w/ SELECT)
-select parse_json('{ "key": "value" }');
+select parse_json('{ "key": "value" }') json,
+    typeof(json),
+    system$typeof(json),
+    is_object(json);
 
 -- this will work (for multi-line JSON)
 select parse_json($$

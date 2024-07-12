@@ -1,4 +1,4 @@
--- Cumulatively combine arrays from previous rows into one aggregate array with unique values
+-- cumulatively combine arrays from previous rows into one aggregate array with unique values
 -- see https://stackoverflow.com/questions/70864833/how-to-cumulatively-combine-arrays-from-previous-rows-into-one-aggregate-array
 USE SCHEMA test.public;
 
