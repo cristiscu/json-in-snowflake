@@ -2,7 +2,7 @@
 -- see https://medium.com/snowflake/convert-xpath-and-jsonpath-expressions-to-snowflake-queries-e34ca15bfa6b
 USE SCHEMA test.public;
 
-CREATE OR REPLACE TABLE store2(v VARIANT) AS
+CREATE OR REPLACE TABLE store(v VARIANT) AS
   SELECT '{ "store": {
     "book": [ 
       { "category": "reference",

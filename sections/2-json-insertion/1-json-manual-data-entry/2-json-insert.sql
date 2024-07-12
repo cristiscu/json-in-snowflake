@@ -8,6 +8,11 @@ create or replace table insert_json(id int, v variant);
 insert into insert_json(id, v)
 values (1, { "key": "value" });
 
+-- this will fail (no { } value as such in Snowflake)
+insert into insert_json(id, v)
+select *
+from values (1, { "key": "value" });
+
 -- this will fail (cannot insert string in variant)
 insert into insert_json(id, v)
 values (1, '{ "key": "value" }');
@@ -19,9 +24,5 @@ values (1, parse_json('{ "key": "value" }'));
 -- this will work (w/ SELECT)
 insert into insert_json(id, v)
 select 1, parse_json('{ "key": "value" }');
-
--- this will fail (no { } value as such in Snowflake)
-insert into insert_json(id, v)
-select * from values (1, { "key": "value" });
 
 select * from insert_json;

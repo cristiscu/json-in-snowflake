@@ -2,14 +2,7 @@
 -- see https://stackoverflow.com/questions/57972555/how-to-insert-json-data-into-a-column-of-a-snowflake-datawarehouse-table
 use schema test.public;
 
-create or replace table insert_json(id int, v variant);
-
--- this will work (w/ SELECT + VALUES)
-insert into insert_json(id, v)
-select $1, parse_json($2)
-from values (1, '{ "key": "value" }');
-
--- this will fail (no { } value as such in Snowflake)
+-- this will fail (no { } such a value type in Snowflake)
 create or replace table insert_json(id int, v variant)
 as select 1, { "key": "value" };
 
@@ -17,10 +10,16 @@ as select 1, { "key": "value" };
 create or replace table insert_json(id int, v variant)
 as select 1, parse_json('{ "key": "value" }');
 
+-- this will work (w/ CTAS + auto-cast to VARIANT)
+create or replace table insert_json(id int, v variant)
+as select 1, '{ "key": "value" }';
+
 -- this will work (w/ CTAS, for large copied JSON content)
 create or replace table insert_json(id int, v variant)
 as select 1, parse_json($$
-{ "key": "value" }
+{
+    "key": "value"
+}
 $$);
 
 -- this will work (w/ CTAS + VALUES)
@@ -28,4 +27,8 @@ create or replace table insert_json(id int, v variant)
 as select $1, parse_json($2)
 from values (1, '{ "key": "value" }');
 
-select * from insert_json;
+select *
+from insert_json;
+
+select *, typeof(v)
+from insert_json;
