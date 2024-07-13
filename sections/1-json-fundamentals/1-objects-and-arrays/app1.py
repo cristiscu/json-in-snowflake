@@ -36,7 +36,9 @@ data = {
 }
 
 print(data["store"])
+
 print("=================================")
 print(type(data["store"]), type(data["store"]["book"]))
+
 print("=================================")
 print(data["store"]["book"][2]["title"]) # Moby Dick

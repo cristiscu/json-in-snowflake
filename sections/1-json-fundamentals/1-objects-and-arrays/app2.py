@@ -41,11 +41,15 @@ s = """
 
 data = json.loads(s)
 print(data)
+
 print("=================================")
 print(json.dumps(data))
+
 print("=================================")
 print(json.dumps(data, indent=2))
+
 print("=================================")
 print(type(data["store"]), type(data["store"]["book"]))
+
 print("=================================")
 print(data["store"]["book"][2]["title"]) # Moby Dick

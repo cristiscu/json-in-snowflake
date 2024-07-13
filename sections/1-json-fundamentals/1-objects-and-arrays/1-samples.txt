@@ -1,0 +1,76 @@
+
+-- most simple (empty) JSON object!
+{ }
+
+-- simple key-value
+{ "name": "John" }
+
+-- key-value dictionary
+{
+    "name": "John",
+    "age": 33
+}
+
+-- nested object
+{
+    "name": "John",
+    "age": 33,
+    "spouse": { "name": "Anne", "age": 30 }
+}
+
+-- nested array + array of scalar values
+{
+    "name": "John",
+    "age": 33,
+    "spouse": { "name": "Anne", "age": 30 },
+    "children": [{ "name": "Jack", "age": 5 }, { "name": "Mary", "age": 2 }],
+    "lived In": ["Los Angeles", "Idaho"],
+    "years lived in": [1999, 2023]
+}
+
+-- outer array + JSON nulls + flexible schema (schema "on-read")
+[
+    {
+        "name": "John",
+        "age": 33,
+        "spouse": { "name": "Anne", "age": 30 },
+        "children": [{ "name": "Jack", "age": 5 }, { "name": "Mary", "age": 2 }],
+        "lived In": ["Los Angeles", "Idaho"],
+        "years lived in": [1999, 2023]
+    },
+    {
+        "name": "Dan",
+        "age": null,
+        "born": "1964-08-08",
+        "profession": "carpenter",
+        "address": { "country": "USA", "city": "San Francisco" },
+        "spouse": [{ "name": "Diana", "age": 50 }, { "name": "Laura", "age": 43 }],
+        "married": true,
+        "children": []
+    }
+]
+
+-- relaxed JSON format (JSON5)
+[
+    {
+        // unquoted key names + single-quoted values
+        name: 'John',
+        age: 33,
+        spouse: { name: 'Anne', age: 30 },
+        children: [{ name: "Jack", age: 5 }, { name: "Mary", age: 2 }],
+        // multiline string
+        "lived In": ["Los
+            Angeles", "Idaho"],
+        "years lived in": [1999, 2023],
+    },
+    {
+        name: "Dan",
+        age: null,
+        born: "1964-08-08",
+        profession: "carpenter",
+        address: { "country": "USA", "city": "San Francisco" },
+        spouse: [{ "name": "Diana", "age": 50 }, { "name": "Laura", "age": 43 }],
+        married: true,
+        children: [],
+    }
+]
