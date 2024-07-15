@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>Radial Dendrogram</title>
+<style>
+p {
+  max-width:1000px;
+  margin:auto;
+  text-align:justify;
+}
+#graph-div{ text-align: center; }
+.node text { font: 14px sans-serif; }
+.node--internal text { text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff; }
+.link {
+  fill: none;
+  stroke: #555;
+  stroke-opacity: 0.4;
+  stroke-width: 1.5px;
+}
+</style>
+</head>
+<div id='graph-div'>
+  <svg width="960" height="960"></svg>
+</div>
+<script src='https://d3js.org/d3.v4.min.js'></script>
+<script>
+let data = {
+    "id": 100,
+    "name": "Steven King",
+    "phone": "(515) 123-4567",
+    "hiredate": "2003-06-17",
+    "salary": 24000,
+    "job": "PRESIDENT",
+    "department": "PRESIDENCE",
+    "employees": [
+        {
+            "id": 101,
+            "name": "Neena Kochhar",
+            "phone": "(515) 123-4568",
+            "hiredate": "2003-06-17",
+            "salary": 17000,
+            "job": "VP",
+            "department": "PRESIDENCE",
+            "employees": [
+                {
+                    "id": 204,
+                    "name": "Hermann Baer",
+                    "phone": "(515) 123-8888",
+                    "hiredate": "2004-06-07",
+                    "salary": 10000,
+                    "job": "SALES REP",
+                    "department": "SALES"
+                },
+                {
+                    "id": 205,
+                    "name": "Shelley Higgins",
+                    "phone": "(515) 123-8080",
+                    "hiredate": "2004-06-07",
+                    "salary": 12000,
+                    "job": "CONTROLLER",
+                    "department": "FINANCE"
+                },
+                {
+                    "id": 108,
+                    "name": "Nancy Greenberg",
+                    "phone": "(515) 124-4569",
+                    "hiredate": "2006-01-03",
+                    "salary": 12000,
+                    "job": "MANAGER",
+                    "department": "FINANCE",
+                    "employees": [
+                        {
+                            "id": 111,
+                            "name": "Ismael Sciarra",
+                            "phone": "(515) 124-4369",
+                            "hiredate": "2007-09-30",
+                            "salary": 7700,
+                            "job": "ACCOUNTANT",
+                            "department": "FINANCE"
+                        },
+                        {
+                            "id": 112,
+                            "name": "Jose Manuel Urman",
+                            "phone": "(515) 124-4469",
+                            "hiredate": "2006-03-07",
+                            "salary": 7800,
+                            "job": "ACCOUNTANT",
+                            "department": "FINANCE"
+                        },
+                        {
+                            "id": 113,
+                            "name": "Luis Popp",
+                            "phone": "(515) 124-4567",
+                            "hiredate": "2007-05-21",
+                            "salary": 6900,
+                            "job": "ACCOUNTANT",
+                            "department": "FINANCE"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 102,
+            "name": "Lex De Haan",
+            "phone": "(515) 123-4569",
+            "hiredate": "2003-06-17",
+            "salary": 17000,
+            "job": "VP",
+            "department": "PRESIDENCE",
+            "employees": [
+                {
+                    "id": 103,
+                    "name": "Alexander Hunold",
+                    "phone": "(590) 423-4567",
+                    "hiredate": "2006-01-03",
+                    "salary": 9000,
+                    "job": "PROGRAMMER",
+                    "department": "IT",
+                    "employees": [
+                        {
+                            "id": 104,
+                            "name": "Bruce Ernst",
+                            "phone": "(590) 423-4568",
+                            "hiredate": "2007-05-21",
+                            "salary": 6000,
+                            "job": "PROGRAMMER",
+                            "department": "IT"
+                        },
+                        {
+                            "id": 106,
+                            "name": "Valli Pataballa",
+                            "phone": "(590) 423-4560",
+                            "hiredate": "2007-05-21",
+                            "salary": 4800,
+                            "job": "PROGRAMMER",
+                            "department": "IT"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 114,
+            "name": "Den Raphaely",
+            "phone": "(515) 127-4561",
+            "hiredate": "2003-06-17",
+            "salary": 11000,
+            "job": "MANAGER",
+            "department": "ANALYTICS",
+            "employees": [
+                {
+                    "id": 115,
+                    "name": "Alexander Khoo",
+                    "phone": "(515) 127-4562",
+                    "hiredate": "2005-12-24",
+                    "salary": 3100,
+                    "job": "CLERK",
+                    "department": "ANALYTICS"
+                },
+                {
+                    "id": 116,
+                    "name": "Shelli Baida",
+                    "phone": "(515) 127-4563",
+                    "hiredate": "2005-12-24",
+                    "salary": 2900,
+                    "job": "CLERK",
+                    "department": "ANALYTICS"
+                }
+            ]
+        },
+        {
+            "id": 121,
+            "name": "Adam Fripp",
+            "phone": "(650) 123-2234",
+            "hiredate": "2003-06-17",
+            "salary": 8200,
+            "job": "MANAGER",
+            "department": "DOCUMENTATION",
+            "employees": [
+                {
+                    "id": 129,
+                    "name": "Laura Bissot",
+                    "phone": "(650) 124-5234",
+                    "hiredate": "2004-06-07",
+                    "salary": 3300,
+                    "job": "CLERK",
+                    "department": "DOCUMENTATION"
+                }
+            ]
+        }
+    ]
+};
+
+let svg = d3.select("svg"),
+  width = svg.attr("width"),
+  height = svg.attr("height"),
+g = svg.append("g").attr("transform", "translate(" + (width / 2 - 15) + "," + (height / 2 + 25) + ")");
+
+let stratify = d3.stratify().
+parentId(function (d) {return d.id.substring(0, d.id.lastIndexOf("."));});
+
+let tree = d3.cluster()
+  .size([360, 390])
+  .separation(function (a, b) {return (a.parent == b.parent ? 1 : 2) / a.depth;});
+
+let root = tree(stratify(data)
+  .sort(function (a, b) {return a.height - b.height || a.id.localeCompare(b.id);}));
+
+let link = g.selectAll(".link")
+  .data(root.descendants().slice(1))
+  .enter().append("path")
+  .attr("class", "link")
+  .attr("d", function (d) {
+    return "M" + project(d.x, d.y)
+      + "C" + project(d.x, (d.y + d.parent.y) / 2)
+      + " " + project(d.parent.x, (d.y + d.parent.y) / 2)
+      + " " + project(d.parent.x, d.parent.y);
+});
+
+let node = g.selectAll(".node")
+  .data(root.descendants())
+  .enter().append("g")
+  .attr("class", function (d) {return "node" + (d.children ? " node--internal" : " node--leaf");})
+  .attr("transform", function (d) {return "translate(" + project(d.x, d.y) + ")";});
+
+node.append("circle")
+  .attr("r", 2.5)
+  .attr("fill", function (d) {
+    let color = '';
+    if (d.data.value == 5) color = "blue";
+    else if (d.data.value == 1) color = "red";
+    return color;
+});
+
+node.append("text")
+  .attr("dy", ".31em")
+  .attr("x", function (d) {return d.x < 180 === !d.children ? 6 : -6;})
+  .style("text-anchor", function (d) {return d.x < 180 === !d.children ? "start" : "end";})
+  .attr("transform", function (d) {return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")";})
+  .text(function (d) {return d.id.substring(d.id.lastIndexOf(".") + 1);});
+
+function project(x, y) {
+  let angle = (x - 90) / 180 * Math.PI,radius = y;
+  return [radius * Math.cos(angle), radius * Math.sin(angle)];
+}
+</script>
+</body>
+</html>

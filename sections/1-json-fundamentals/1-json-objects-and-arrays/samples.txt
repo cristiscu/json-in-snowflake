@@ -8,7 +8,11 @@
 -- key-value dictionary
 {
     "name": "John",
-    "age": 33
+    "age": 33,
+    "hired": "2020-01-02",
+    "balance": 2500.00,
+    "married": true,
+    "lived In": null
 }
 
 -- nested object

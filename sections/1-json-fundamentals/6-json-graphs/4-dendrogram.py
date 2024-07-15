@@ -10,7 +10,7 @@ def getPath(node, nodes=[], path=""):
     return nodes
 
 import json
-with open("../../../data/employees-path.json") as fin:
+with open("../../../data/employees.json") as fin:
     root = json.load(fin)
 
 path = getPath(root)

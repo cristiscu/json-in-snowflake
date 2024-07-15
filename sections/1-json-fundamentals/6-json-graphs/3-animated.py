@@ -18,7 +18,7 @@ with open("../../../data/employees.json") as fin:
 simplify(root)
 jsn = json.dumps(root, indent=2)
 with open("../../../data/employees-simplified.json", "w") as f:
-    f.writelines(json)
+    f.writelines(jsn)
 
 with open("templates/collapsible-tree.html", "r") as file:
     content = file.read()

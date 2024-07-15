@@ -1,0 +1,65 @@
+{
+  "name": "Steven King",
+  "children": [
+    {
+      "name": "Neena Kochhar",
+      "children": [
+        {
+          "name": "Hermann Baer"
+        },
+        {
+          "name": "Shelley Higgins"
+        },
+        {
+          "name": "Nancy Greenberg",
+          "children": [
+            {
+              "name": "Ismael Sciarra"
+            },
+            {
+              "name": "Jose Manuel Urman"
+            },
+            {
+              "name": "Luis Popp"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lex De Haan",
+      "children": [
+        {
+          "name": "Alexander Hunold",
+          "children": [
+            {
+              "name": "Bruce Ernst"
+            },
+            {
+              "name": "Valli Pataballa"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Den Raphaely",
+      "children": [
+        {
+          "name": "Alexander Khoo"
+        },
+        {
+          "name": "Shelli Baida"
+        }
+      ]
+    },
+    {
+      "name": "Adam Fripp",
+      "children": [
+        {
+          "name": "Laura Bissot"
+        }
+      ]
+    }
+  ]
+}
