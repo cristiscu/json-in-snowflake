@@ -1,51 +1,10 @@
-import configparser
+# Simplified Data Profiler and Modeler
+# Medium post: https://medium.com/snowflake/json-data-profiler-as-a-live-streamlit-web-app-54096b00a615
+# GitHub repo: https://github.com/cristiscu/json-data-profiler
+
 import json
-import yaml
-import xmltodict
-import urllib.parse
 import streamlit as st
 from io import StringIO
-
-# ==========================================================================
-class Config:
-    themes = {}
-    theme = None
-
-    def __new__(cls):
-        raise TypeError("This is a static class and cannot be instantiated.")
-    
-    @classmethod
-    def loadThemes(cls):
-        parser = configparser.ConfigParser()
-        parser.read("themes.conf")
-        cls.themes = {}
-        for section in parser.sections():
-            cls.themes[section] = Theme(
-                parser.get(section, "color"),
-                parser.get(section, "fillcolor"),
-                parser.get(section, "fillcolorC"),
-                parser.get(section, "bgcolor"),
-                parser.get(section, "icolor"),
-                parser.get(section, "tcolor"),
-                parser.get(section, "style"),
-                parser.get(section, "shape"),
-                parser.get(section, "pencolor"),
-                parser.get(section, "penwidth"))
-        return cls.themes
-
-class Theme:
-    def __init__(self, color, fillcolor, fillcolorC,
-            bgcolor, icolor, tcolor, style, shape, pencolor, penwidth):
-        self.color = color
-        self.fillcolor = fillcolor
-        self.fillcolorC = fillcolorC
-        self.bgcolor = bgcolor
-        self.icolor = icolor
-        self.tcolor = tcolor
-        self.style = style
-        self.shape = shape
-        self.pencolor = pencolor
-        self.penwidth = penwidth
 
 # ==========================================================================
 class JsonManager:
@@ -104,12 +63,24 @@ class Val:
                     self.vals.append(x)
 
     def _dumpVals(self):
-        return ''
+        s = ''; i = 0
+        for val in self.vals[0:4]:
+            if i >= 3: s += ", ..."
+            else:
+                if isinstance(val, str):
+                    val = str(val).replace("\n", " ")
+                    if len(str(val)) > 20:
+                        val = f'{str(val)[:20]}...'
+                s += f'{", " if len(s) > 0 else ""}{val}'
+            i += 1
+        return s
     
     def dump(self, last=True, lastVal=False):
         if self.isPrimitive():
             s = "" if last else ", "
-            return f'"{self.type}"{s}'
+            counts = f' ({len(self.vals)})'
+            samples = f': {self._dumpVals()}'
+            return f'"{self.type}{counts}{samples}"{s}'
         else:
             v = self.val.dump(last, lastVal)
             if lastVal or v.startswith("[ ]") or v.startswith("{ }"):
@@ -128,7 +99,8 @@ class Prop:
 
     def getName(self):
         req = "" if self.req else "*"
-        return f'"{self.key}{req}"'
+        counts = f' ({self.count})'
+        return f'"{self.key}{req}{counts}"'
 
     def dumpProp(self, last=True, lastVal=False):
         return f'{self.getName()}: {self.val.dump(last, lastVal)}'
@@ -297,14 +269,13 @@ class ERDManager:
 
     @classmethod
     def getEmptyDotShape(cls, label):
-        return (f'  {label} [fillcolor="{Config.theme.fillcolorC}" color="{Config.theme.color}"'
-            + ' penwidth="1" shape="point" label=" "]\n')
+        return (f'  {label} [fillcolor="#f5f5f5" color="#6c6c6c" penwidth="1" shape="point" label=" "]\n')
 
     @classmethod
     def createGraph(cls):
         s = ('digraph {\n'
             + '  graph [ rankdir="RL" bgcolor="#ffffff" ]\n'
-            + f'  node [ style="filled" shape="{Config.theme.shape}" gradientangle="180" ]\n'
+            + f'  node [ style="filled" shape="Mrecord" gradientangle="180" ]\n'
             + '  edge [ arrowhead="none" arrowtail="normal" dir="both" ]\n\n'
             + cls.getEmptyDotShape(cls.getTopObjLabel()))
 
@@ -407,8 +378,8 @@ class Table:
         if len(s) == 0:
             return ERDManager.getEmptyDotShape(self.name)
         return (f'  {self.name} [\n'
-            + f'    fillcolor="{Config.theme.fillcolorC}" color="{Config.theme.color}" penwidth="1"\n'
-            + f'    label=<<table style="{Config.theme.style}" border="0" cellborder="0" cellspacing="0" cellpadding="1">\n'
+            + f'    fillcolor="#f5f5f5" color="#6c6c6c" penwidth="1"\n'
+            + f'    label=<<table style="rounded" border="0" cellborder="0" cellspacing="0" cellpadding="1">\n'
             + s
             + f'    </table>>\n  ]\n')
 
@@ -416,15 +387,15 @@ class Table:
         s = ""
         for col in self.columns:
             if col.datatype is not None:
-                s += (f'      <tr><td align="left"><font color="{Config.theme.icolor}">{col.getName()}</font></td>\n'
-                    + f'      <td align="left"><font color="{Config.theme.icolor}">{col.datatype}</font></td></tr>\n')
+                s += (f'      <tr><td align="left"><font color="#000000">{col.getName()}</font></td>\n'
+                    + f'      <td align="left"><font color="#000000">{col.datatype}</font></td></tr>\n')
         return s
 
     def getTopDotLink(self):
         if not self.isTop: return ""
         top_label = ERDManager.getTopObjLabel()
         array = "" if top_label == "JSON_OBJECT" else ' arrowtail="crow" style="dashed"'
-        return f'  {self.name} -> {top_label} [ penwidth="{Config.theme.penwidth}" color="{Config.theme.pencolor}"{array} ]\n'
+        return f'  {self.name} -> {top_label} [ penwidth="1" color="696969"{array} ]\n'
 
     def getDotLinks(self):
         s = "" if not self.isTop else self.getTopDotLink()
@@ -434,79 +405,54 @@ class Table:
                 label = f' label=<<i>{col.getName()}</i>>'
                 if col.obj is not None:
                     s += (f'  {col.obj.name} -> {self.name}'
-                        + f' [ penwidth="{Config.theme.penwidth}" color="{Config.theme.pencolor}"{dashed}{label} ]\n')
+                        + f' [ penwidth="1" color="696969"{dashed}{label} ]\n')
                 else:
                     for obj in col.arr:
                         s += (f'  {obj.name} -> {self.name}'
-                            + f' [ penwidth="{Config.theme.penwidth}" color="{Config.theme.pencolor}"{dashed}{label} arrowtail="crow" ]\n')
+                            + f' [ penwidth="1" color="696969"{dashed}{label} arrowtail="crow" ]\n')
         return s
 
 
-def loadFile():
-    filename = "test.json" if uploaded_file is None else uploaded_file.name
-    filename = filename.lower()
-    if 'filename' not in st.session_state \
-        or st.session_state.filename != filename:
-        if uploaded_file is not None:
-            bytes = uploaded_file.getvalue()
-            raw = StringIO(bytes.decode("utf-8")).read()
-        else:
-            with open(filename) as f:
-                raw = f.read()
-
-        if filename.endswith(".yml") or filename.endswith(".yaml"):
-            text = json.dumps(yaml.safe_load(raw), indent=3)
-            filetype = "yaml"
-        elif filename.endswith(".xml"):
-            text = json.dumps(xmltodict.parse(raw), indent=3)
-            filetype = "xmlDoc"
-        else:
-            text = raw
-            filetype = "json"
-
-        data = json.loads(text)
-        if not isinstance(data, dict) and not isinstance(data, list):
-            st.error("Bad Format!")
-            st.stop()
-        
-        st.session_state['filename'] = filename
-        st.session_state['filetype'] = filetype
-        st.session_state["raw"] = raw
-        st.session_state["text"] = text
-        st.session_state["data"] = data
-
-    filetype = st.session_state.filetype
-    raw = st.session_state.raw
-    text = st.session_state.text
-    data = st.session_state.data
-    return raw, text, data
-
-def renderFile():
-    _, text, data = loadFile()
-    objects = JsonManager.inferSchema(data)
-    ERDManager.getEntities(objects)
-
-    tabSource, tabERD = st.tabs(["JSON Source File", "Inferred Object Model"])
-
-    with tabSource:
-        st.caption("This is your eventually converted and formatted source file, in JSON.")
-        st.code(text, language="json", line_numbers=True)
-
-    with tabERD:
-        st.caption("This is your infered object model, with GraphViz.")
-        st.graphviz_chart(ERDManager.createGraph(), use_container_width=True)
-
-
 st.set_page_config(layout="wide")
-st.title("JSON Data Profiler")
-st.caption("Upload a JSON, YAML or XML data file, and get its inferred schema and a Entity-Relationship diagram.")
+st.title("JSON Data Profiler and Modeler")
 
 uploaded_file = st.sidebar.file_uploader(
-    "Upload a JSON, XML, or YML file", accept_multiple_files=False)
+    "Upload a JSON file", type=['json'], accept_multiple_files=False)
 
-Config.loadThemes()
-themeName = st.sidebar.selectbox('Theme:', tuple(Config.themes.keys()), index=0,
-    help="Color theme for the ERD")
-Config.theme = Config.themes[themeName]
+filename = "../../../data/store.json" if uploaded_file is None else uploaded_file.name
+filename = filename.lower()
+if 'filename' not in st.session_state or st.session_state.filename != filename:
+    if uploaded_file is not None:
+        bytes = uploaded_file.getvalue()
+        raw = StringIO(bytes.decode("utf-8")).read()
+    else:
+        with open(filename) as f:
+            raw = f.read()
+    text = raw
 
-renderFile()
+    data = json.loads(text)
+    if not isinstance(data, dict) and not isinstance(data, list):
+        st.error("Bad Format!")
+        st.stop()
+    
+    st.session_state['filename'] = filename
+    st.session_state["raw"] = raw
+    st.session_state["text"] = text
+    st.session_state["data"] = data
+
+
+tabSource, tabSchema, tabERD = st.tabs(
+    ["Source File", "Data Profile", "Relational Model"])
+
+raw = st.session_state.raw
+text = st.session_state.text
+tabSource.code(text, language="json", line_numbers=True)
+
+data = st.session_state.data
+objects = JsonManager.inferSchema(data)
+schema = objects.dump()
+tabSchema.code(schema, language="json", line_numbers=True)
+
+ERDManager.getEntities(objects)
+chart = ERDManager.createGraph()
+tabERD.graphviz_chart(chart, use_container_width=True)

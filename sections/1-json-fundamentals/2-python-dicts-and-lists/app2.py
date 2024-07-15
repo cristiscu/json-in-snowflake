@@ -1,5 +1,3 @@
-import json
-
 s = """
 {
     "store": {
@@ -38,6 +36,8 @@ s = """
     }
 }
 """
+
+import json
 
 data = json.loads(s)
 print(data)
