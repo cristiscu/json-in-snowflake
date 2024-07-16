@@ -13,7 +13,7 @@ select object_construct(src:id::string, 'id')
 from (select parse_json('{ "id": 123 }') as src);
 
 -- returns a string (from concatenation with correctly parsed JSON), not an OBJECT
-select '{ "id": ' || id || ' )'
+select '{ "id": ' || id || ' }'
 from (
     select src:"id" as id
     from (

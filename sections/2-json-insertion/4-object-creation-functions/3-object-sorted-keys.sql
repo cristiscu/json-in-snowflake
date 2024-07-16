@@ -9,6 +9,6 @@ from values (1, 2) t(a, b);
 
 -- not OK (strings!)
 select
-    '{ "b": ' || b || ', "a": ' || a || '}' str1, typeof(str1),
+    '{ "b": ' || b || ', "a": ' || a || '}' str1, --typeof(str1),
     to_variant('{ "b": ' || b || ', "a": ' || a || '}') str2, typeof(str2)
 from values (1, 2) t(a, b);

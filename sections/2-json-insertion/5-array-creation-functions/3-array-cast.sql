@@ -8,6 +8,7 @@ select
 -- not ok
 SELECT '[1, 2, 3]' arr, typeof(arr);
 
+-- ================================================
 CREATE OR REPLACE TABLE test.public.arrays1(
     arr1 array, arr2 variant, arr3 variant, arr4 variant)
 AS SELECT '[1, 2, 3]', '[1, 2, 3]',
