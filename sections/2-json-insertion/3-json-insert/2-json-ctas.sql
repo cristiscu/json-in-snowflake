@@ -44,6 +44,7 @@ from insert_json;
 -- not an OBJECT/ARRAY
 create or replace table insert_json2(obj OBJECT)
 as select [1, 2, 3];
-create or replace table insert_json2(arr ARRAY)
-as select '{ "key": "value" }';
 
+create or replace table insert_json2(arr ARRAY)
+as select parse_json('{ "key": "value" }');
+table insert_json2;

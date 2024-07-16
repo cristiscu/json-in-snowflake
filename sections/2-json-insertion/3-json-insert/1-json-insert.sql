@@ -27,4 +27,5 @@ values (1, parse_json('{ "key": "value" }'));
 insert into insert_json(id, v)
 select 1, parse_json('{ "key": "value" }');
 
-select * from insert_json;
+select *, typeof(v)
+from insert_json;

@@ -1,5 +1,5 @@
--- OBJECT_CONSTRUCT
 
+-- OBJECT_CONSTRUCT
 select
     parse_json('{ "id": 123 }') json1, typeof(json1),
     object_construct('id', 123) json2, typeof(json2);

@@ -31,7 +31,7 @@ select $1
 from values ('{ "key": "value" }');
 
 -- this will work (w/ SELECT + VALUES)
-select parse_json($1)
+select parse_json($1) json, typeof(json)
 from values ('{ "key": "value" }');
 
 -- this will work (w/ SELECT)

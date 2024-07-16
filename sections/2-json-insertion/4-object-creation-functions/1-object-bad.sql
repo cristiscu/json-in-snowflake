@@ -1,4 +1,4 @@
--- bad object instantiations
+-- bad OBJECT instantiations
 
 -- not such a data type value (OBJECT, not ARRAY!)
 select { "id": 123 };
