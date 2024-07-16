@@ -1,5 +1,7 @@
 -- INSERT JSON data w/ parse_json
 -- see https://stackoverflow.com/questions/57972555/how-to-insert-json-data-into-a-column-of-a-snowflake-datawarehouse-table
+
+create database if not exists test;
 use schema test.public;
 
 create or replace table insert_json(id int, v variant);

@@ -1,4 +1,4 @@
-CREATE OR REPLACE TABLE test.public.store2(v VARIANT)
+CREATE OR REPLACE TABLE test.public.store(v VARIANT)
 AS SELECT $$
 {
   "store": {
@@ -34,4 +34,5 @@ AS SELECT $$
 }
 $$;
 
-table test.public.store2;
+select v, typeof(v)
+from test.public.store;

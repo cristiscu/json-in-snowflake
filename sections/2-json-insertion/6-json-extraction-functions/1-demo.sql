@@ -38,13 +38,15 @@ from (select parse_json($json) v);
 -- GET_PATH
 select
     v:custom[0].name::string,
-
     get_path(v:custom, '[0]'),
-    get_path(get_path(v:custom, '[0]'), 'name'),
     get_path(v:custom, '[0].name'),
-    get_path(v, 'custom[0].name'),
-    get(get(v:custom, 0), 'name')
+    get_path(v, 'custom[0].name')
+from (select parse_json($json) v);
 
+select
+    v:custom[0].name::string,
+    get(get(get(v, 'custom'), 0), 'name'),
+    get_path(get_path(get_path(v, 'custom'), '[0]'), 'name')
 from (select parse_json($json) v);
 
 -- JSON_EXTRACT_PATH_TEXT

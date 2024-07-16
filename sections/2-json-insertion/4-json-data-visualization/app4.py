@@ -15,6 +15,6 @@ rows = session.sql(query).collect()
 data = json.loads(str(rows[0][0]))
 data = json.dumps(data, indent=2)
 
-tabCode, tabJson = st.tabs(["Code", "JSON"])
+tabCode, tabJson = st.tabs(["JSON", "JSON Viewer"])
 tabCode.code(data, language='json')
 tabJson.json(data)
