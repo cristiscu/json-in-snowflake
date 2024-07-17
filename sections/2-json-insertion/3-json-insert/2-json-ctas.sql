@@ -2,9 +2,9 @@
 -- see https://stackoverflow.com/questions/57972555/how-to-insert-json-data-into-a-column-of-a-snowflake-datawarehouse-table
 use schema test.public;
 
--- this will fail (no { } such a value type in Snowflake)
+-- auto OBJECT-to-VARIANT
 create or replace table insert_json(id int, v variant)
-as select 1, { "key": "value" };
+as select 1, { 'key': 'value' };
 
 -- this will work (w/ CTAS)
 create or replace table insert_json(id int, v variant)
@@ -28,7 +28,7 @@ as select 1, parse_json($$
 }
 $$);
 
--- this will fail (no implicit conversion)
+-- this will fail (no implicit conversion string-to-VARIANT)
 create or replace table insert_json(id int, v variant)
 as select $1, $2
 from values (1, '{ "key": "value" }');
@@ -41,10 +41,10 @@ from values (1, '{ "key": "value" }');
 select *, typeof(v)
 from insert_json;
 
--- not an OBJECT/ARRAY
+-- no ARRAY into OBJECT, or OBJECT into ARRAY
 create or replace table insert_json2(obj OBJECT)
 as select [1, 2, 3];
 
 create or replace table insert_json2(arr ARRAY)
-as select parse_json('{ "key": "value" }');
+as select { 'key': 'value' };
 table insert_json2;

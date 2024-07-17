@@ -6,16 +6,11 @@ use schema test.public;
 
 create or replace table insert_json(id int, v variant);
 
--- this will fail (no { } value as such in Snowflake)
+-- auto OBJECT-to-VARIANT
 insert into insert_json(id, v)
-values (1, { "key": "value" });
+values (1, { 'key': 'value' });
 
--- this will fail (no { } value as such in Snowflake)
-insert into insert_json(id, v)
-select *
-from values (1, { "key": "value" });
-
--- this will fail (cannot insert string in variant)
+-- this will fail (no auto-convert string-to-VARIANT)
 insert into insert_json(id, v)
 values (1, '{ "key": "value" }');
 

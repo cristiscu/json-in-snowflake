@@ -1,9 +1,9 @@
 -- bad OBJECT instantiations
 
--- not such a data type value (OBJECT, not ARRAY!)
+-- use '...' in SQL, "..." in JSON
 select { "id": 123 };
 select [{ "id": 123 }, 456];
-select [123, 456];
+select ["123", 456];
 
 -- returns a string, not an OBJECT (we need OBJECT_CONSTRUCT for this)
 select '{ "id": 123 }' obj, typeof(obj);
