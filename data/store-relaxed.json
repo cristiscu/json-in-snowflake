@@ -1,0 +1,36 @@
+{
+    store: {
+        book: [ 
+            {
+                "category": 'reference',
+                "author": "Nigel Rees",
+                "title": "Sayings of the Century",
+                "price": 8.95,
+            },
+            {
+                "category": "fiction",
+                "author": "Evelyn Waugh",
+                "title": 'Sword of "Honour"',
+                "price": +12.
+            },
+            {
+                "category": "fiction",
+                "author": "Herman Melville",
+                "title": "Moby Dick",
+                "isbn": null,
+                "price": 8.99
+            },
+            {
+                "category": "fiction",
+                "author": null,
+                "title": "The Lord of the Rings",
+                "isbn": "0-395-19395-8",
+                "price": 22.99
+            },
+        ],
+        "bicycle": {
+            "color": "red",
+            "price": null
+        }
+    }
+}

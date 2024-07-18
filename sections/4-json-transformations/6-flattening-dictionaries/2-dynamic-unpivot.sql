@@ -48,11 +48,10 @@ with cte as (
     
     v:empDetails[0].citiesLived[1].place,
     v:empDetails[0].citiesLived[1].yearsLived,
-    v:empDetails[0].citiesLived[1].yearsLived[0],
+    v:empDetails[0].citiesLived[1].yearsLived[0]
 
 from test.public.employee_details)
 
-SELECT f.KEY, f.VALUE
-FROM (SELECT OBJECT_CONSTRUCT_KEEP_NULL(*) AS j FROM cte) AS s,
-    TABLE(FLATTEN(s.j)) f
-ORDER BY f.KEY;
+select key, value
+from (select OBJECT_CONSTRUCT_KEEP_NULL(*) obj from cte), table(flatten(obj))
+order by key;

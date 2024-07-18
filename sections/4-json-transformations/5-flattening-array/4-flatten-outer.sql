@@ -18,6 +18,7 @@ select empDetails.value,
     
     citiesLived.value:place,
     yearsLived.value:yearsLived
+    
 from test.public.employee_details emp,
     lateral flatten(v:empDetails) empDetails, 
     lateral flatten(empDetails.value:children, outer=>true) children,

@@ -9,7 +9,7 @@ use schema test.public;
 -- (beware this will show array of strings no matter what in VSCode!)
 CREATE OR REPLACE TABLE multi_arrays(arr1 array, arr2 array, arr3 array)
 AS SELECT '[1, 2, 3]', '[11, 12, 13]', '[101, 102, 103]';
-SELECT * FROM multi_arrays;
+TABLE multi_arrays;
 
 -- could also further filter by INDEX to get the Nth row
 -- see https://stackoverflow.com/questions/64918384/getting-the-index-of-the-json-array-using-sql-in-snowflake
