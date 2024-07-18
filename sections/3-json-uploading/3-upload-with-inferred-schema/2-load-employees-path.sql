@@ -1,14 +1,5 @@
 -- SNOWSQL -c test_conn -f 2-load-employees-path.sql
-
 use schema test.public;
-
-create or replace file format json_file_format
-    TYPE='JSON'
-    STRIP_OUTER_ARRAY=TRUE;
-
-create or replace stage json_stage file_format=json_file_format;
-
-PUT file://../../../data/employees-path.json @json_stage;
 
 /*
 [
@@ -17,6 +8,14 @@ PUT file://../../../data/employees-path.json @json_stage;
   ...
 ]
 */
+
+create or replace file format json_file_format
+    TYPE='JSON'
+    STRIP_OUTER_ARRAY=TRUE;
+
+create or replace stage json_stage file_format=json_file_format;
+
+PUT file://../../../data/employees-path.json @json_stage;
 
 SELECT * 
 FROM TABLE(INFER_SCHEMA(

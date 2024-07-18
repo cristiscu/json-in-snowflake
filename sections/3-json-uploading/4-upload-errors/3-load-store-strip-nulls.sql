@@ -15,12 +15,10 @@ CREATE OR REPLACE TABLE test.public.store_strip_nulls(v VARIANT);
 
 COPY INTO test.public.store_strip_nulls
 FROM @test.public.temp_stage
-
 FILE_FORMAT=(
     TYPE=JSON
     STRIP_NULL_VALUES=TRUE
     NULL_IF=('null', 'json_null'))
-
 FILES=('store-relaxed.json')
 PATTERN='*\.json'
 VALIDATION_MODE=RETURN_ALL_ERRORS   -- comment-out to load data when ok

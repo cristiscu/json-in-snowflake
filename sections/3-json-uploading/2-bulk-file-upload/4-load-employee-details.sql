@@ -1,7 +1,6 @@
 -- w/ STRIP_OUTER_ARRAY=TRUE
 -- SNOWSQL -c test_conn -f 3-load-employee-details.sql
 -- see https://stackoverflow.com/questions/65535086/loading-json-in-snowflake
-
 use schema test.public;
 
 create or replace file format json_file_format
