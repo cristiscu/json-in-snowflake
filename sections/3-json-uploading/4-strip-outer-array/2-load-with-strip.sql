@@ -1,5 +1,5 @@
 -- w/ STRIP_OUTER_ARRAY=TRUE
--- SNOWSQL -c test_conn -f 3-load-employee-details.sql
+-- SNOWSQL -c test_conn -f 2-load-with-strip.sql
 -- see https://stackoverflow.com/questions/65535086/loading-json-in-snowflake
 use schema test.public;
 
