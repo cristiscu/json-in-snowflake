@@ -1,3 +1,4 @@
+-- Count groups with all permutations
 -- see https://stackoverflow.com/questions/69604547/list-sorting-in-snowflake-as-part-of-the-select?rq=3
 use schema test.public;
 

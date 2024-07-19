@@ -29,4 +29,3 @@ SELECT
     ARRAY_CONSTRUCT('a', 'f', 'c', 'g', 'e') arr2,
     except_arrays_js(arr1, arr2) arre;
 
--- (4) FILTER/TRANSFORM? TODO

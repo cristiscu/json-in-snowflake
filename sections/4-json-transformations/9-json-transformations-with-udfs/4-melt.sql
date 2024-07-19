@@ -14,7 +14,7 @@ CREATE OR REPLACE TABLE melt(a INT, b INT, c DECIMAL(10,2)) AS
     SELECT 1, 10, 0.1
     UNION SELECT 2, 11, 0.12
     UNION SELECT 3, 12, 0.13;
-SELECT * from melt;
+TABLE melt;
 
 -- (1) w/ FLATTEN + OBJECT_CONSTRUCT_KEEP_NULL
 -- transforms rows into JSON --> { a: 1, b: 10, c: 0.1 } ...

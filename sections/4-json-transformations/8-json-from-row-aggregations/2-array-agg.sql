@@ -13,5 +13,5 @@ FROM array_str, TABLE(FLATTEN(array_str.arr)) AS f
 GROUP BY arr;
 
 -- w/ higher function TRANSFORM
-SELECT arr, transform(arr, elem text -> elem::int) AS arri
+SELECT arr, TRANSFORM(arr, elem text -> elem::int) AS arri
 FROM array_str;

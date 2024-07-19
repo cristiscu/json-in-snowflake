@@ -1,4 +1,4 @@
--- filter by array containt (instead of value IN (...))
+-- filter by array constraint (instead of value IN (...))
 -- see https://stackoverflow.com/questions/68597737/convert-an-array-of-strings-to-an-array-of-numbers-in-snowflake
 
 -- row generator 1..10
