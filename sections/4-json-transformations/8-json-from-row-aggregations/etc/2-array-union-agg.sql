@@ -1,4 +1,4 @@
--- show distinct aggregate array values
+-- Show distinct aggregate array values
 -- see https://stackoverflow.com/questions/60729360/how-to-combine-arrays-in-snowsql-groupby-and-only-keep-distinct-values
 use schema test.public;
 

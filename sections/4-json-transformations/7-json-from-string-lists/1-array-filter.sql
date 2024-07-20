@@ -7,6 +7,7 @@ select row_number() over(order by 1) as rn
 from table(generator(rowcount => 10));
 
 -- false, true
+select SPLIT('1,4,32', ','), SPLIT('1,4,32', ',')::array(int);
 select array_contains(2::varchar::variant, SPLIT('1,4,32', ','));
 select array_contains(4::varchar::variant, SPLIT('1,4,32', ','));
 

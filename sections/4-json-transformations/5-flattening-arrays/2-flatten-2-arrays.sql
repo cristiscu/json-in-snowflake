@@ -12,12 +12,12 @@ select to_variant('{ cities: [
 /*
 Expected result:
 
-CITY	       PERSON	 AGE
+CITY	     PERSON	   AGE
 Vancouver    Mark	   55
-Vancouver	   John	   80
+Vancouver	 John	   80
 Toronto	     Mary	   20
-Toronto	     George	 44
-Montreal	   Jane	   30
+Toronto	     George	   44
+Montreal	 Jane	   30
 */
 
 -- no results

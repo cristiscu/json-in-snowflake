@@ -1,8 +1,14 @@
 -- FLATTEN
 -- see https://docs.snowflake.com/en/sql-reference/functions/flatten
 
+select t.arr, elem.value, elem.index
+from (select ['a', 'b', 'c'] arr) t, lateral flatten(t.arr) elem;
+
+select t.obj, kv.value, kv.key
+from (select {'name':'John', 'age':32} obj) t, lateral flatten(t.obj) kv;
+
 select *
-from test.public.store_json,
+    from test.public.store_json,
     lateral flatten(v:store.book);
 
 -- INDEX/VALUE for ARRAY

@@ -1,4 +1,4 @@
--- convert one full table to JSON
+-- Convert one full table to JSON
 -- see https://stackoverflow.com/questions/71864782/snowflake-convert-an-entire-table-to-json
 use schema test.public;
 
@@ -21,5 +21,5 @@ FROM inventory;
   "nuts":    { "price": 11.22, "quantity": 120 }
 }
 */
-SELECT object_agg(product, object_construct('price', price, 'quantity', quantity)) as obj
+SELECT object_agg(product, {'price': price, 'quantity': quantity}) as obj
 FROM inventory;
