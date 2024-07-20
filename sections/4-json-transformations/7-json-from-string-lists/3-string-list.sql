@@ -1,3 +1,4 @@
+-- Break string list values into rows --> STRTOK_TO_ARRAY
 -- see https://stackoverflow.com/questions/69676196/break-json-list-of-values-into-rows-in-a-snowflake-database-table
 
 /*
@@ -20,8 +21,7 @@ B           M           completed       Delhi
 C           F           cancelled       Mumbai
 C           F           cancelled       Pune
 D           M           pending         Cochi
- */
-
+*/
 
 -- (1) w/ 1x FLATTEN + STRTOK_TO_ARRAY and no JSON initially
 with cte1(name, gender, orders, city) as (
@@ -39,10 +39,10 @@ from cte2, lateral flatten(city) c;
 
 -- (2) w/ 2x FLATTEN + STRTOK_TO_ARRAY and JSON initially
 with cte1(name, gender, orders, city) as (
-    select 'A', 'M', parse_json('["completed"]'), parse_json('["Cochi,Hyderabad"]')
-    union all select 'B', 'M', parse_json('["completed"]'), parse_json('["Cochi,Hyderabad,Delhi"]')
-    union all select 'C', 'F', parse_json('["cancelled"]'), parse_json('["Mumbai,Pune"]')
-    union all select 'D', 'M', parse_json('["pending"]'), parse_json('["cochi"]'))
+    select 'A', 'M', ['completed'], ['Cochi,Hyderabad']
+    union all select 'B', 'M', ['completed'], ['Cochi,Hyderabad,Delhi']
+    union all select 'C', 'F', ['cancelled'], ['Mumbai,Pune']
+    union all select 'D', 'M', ['pending'], ['cochi'])
 select name, gender,
     orders.value::varchar orders,
     city.value::varchar city

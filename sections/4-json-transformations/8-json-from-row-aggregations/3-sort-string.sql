@@ -2,8 +2,8 @@
 use schema test.public;
 
 create or replace table sort_string(id string, refs string)
-as SELECT * FROM VALUES
-('ID1', 'ANN,BOB'), ('ID2', 'BOB,ANN'), ('ID3', 'CHRIS,BOB,ANN');
+as select *
+from values ('ID1', 'ANN,BOB'), ('ID2', 'BOB,ANN'), ('ID3', 'CHRIS,BOB,ANN');
 
 -- (1)
 SELECT order_arry, count(distinct(id)) as count

@@ -8,6 +8,9 @@ use schema test.public;
 SELECT ARRAY_DISTINCT(ARRAY_CAT(['a', 'b'], ['a', 'c'])) arrd;
 
 -- (2) w/ ARRAY_AGG after FLATTEN
+SELECT f.value
+FROM TABLE(FLATTEN(ARRAY_CAT(['a', 'b'], ['a', 'c']))) f;
+
 SELECT ARRAY_AGG(DISTINCT F.value) AS arrd
 FROM TABLE(FLATTEN(ARRAY_CAT(['a', 'b'], ['a', 'c']))) f;
 

@@ -28,6 +28,8 @@ as select v:empDetails c01,
     v:empDetails[0].citiesLived[1].yearsLived[0] c16
 
 from employee_details;
+select *
+from employee_details_view;
 
 -- single OBJECT w/ all view columns
 select OBJECT_CONSTRUCT_KEEP_NULL(*) obj
