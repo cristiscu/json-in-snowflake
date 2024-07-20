@@ -3,12 +3,12 @@
 
 -- KEY/VALUE for OBJECT
 select key, value
-from test.public.employee_details emp,
-    lateral flatten(v:empDetails[0].phoneNumber);
-
-select key, value
 from test.public.store_json,
     lateral flatten(v:store.bicycle);
+
+select key, value
+from test.public.employee_details emp,
+    lateral flatten(v:empDetails[0].phoneNumber);
 
 -- PATH
 select key, value

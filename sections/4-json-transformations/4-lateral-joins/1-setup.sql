@@ -1,4 +1,5 @@
 -- create TEST.EMPS2 schema
+create schema if not exists test.emps2;
 use schema test.emps2;
 
 create or replace table dept (dept_id int, name string) as
@@ -11,7 +12,9 @@ create or replace table emp (
   projects variant);
 
 insert into emp
-select 1, 'John', 1, ARRAY_CONSTRUCT('IT', 'Prod')
-union select 2, 'Mary', 1, ARRAY_CONSTRUCT('PS', 'Prod Support')
+select 1, 'John', 1, ['IT', 'Prod']
+union select 2, 'Mary', 1, ['PS', 'Prod Support']
 union select 3, 'Bob', 2, null
 union select 4, 'Jack', null, null;
+
+select * from emp;

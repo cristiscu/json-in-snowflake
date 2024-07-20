@@ -29,7 +29,8 @@ SELECT f.key, f.value
 FROM cte, TABLE(FLATTEN(cte.json)) f
 ORDER BY f.key;
 
--- (2) w/ Python stored proc
+-- ===============================================
+-- (2) w/ Pandas data frame, in Python stored proc
 CREATE OR REPLACE PROCEDURE melt_python(
     tablename TEXT, ids ARRAY, vals ARRAY)
     RETURNS TABLE()
@@ -50,7 +51,7 @@ $$;
 
 CALL melt_python('MELT', [], ['A', 'B', 'C']);
 
--- (3) UNPIVOT all w/ Python stored proc
+-- (3) w/ Snowpark DataFrame UNPIVOT, in Python stored proc
 CREATE OR REPLACE PROCEDURE unpivot_all(tablename TEXT)
     RETURNS TABLE()
     LANGUAGE PYTHON

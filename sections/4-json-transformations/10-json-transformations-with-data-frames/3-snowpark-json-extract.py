@@ -8,8 +8,8 @@ session = Session.builder.configs(pars).create()
 
 # load table content + get first JSON cell from DataFrame
 df = session.table("test.public.store")
-jsn = json.loads(df.select(df["v"]).collect()[0][0])
+data = json.loads(df.select(df["v"]).collect()[0][0])
 
 # get title of the third book (from JSON doc)
-title = jsn["store"]["book"][2]["title"]
+title = data["store"]["book"][2]["title"]
 print(f"Third book's title: {title}")
