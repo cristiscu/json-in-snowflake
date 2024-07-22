@@ -1,0 +1,230 @@
+{
+    "GlobalStats": {
+      "partitionsTotal": 33,
+      "partitionsAssigned": 33,
+      "bytesAssigned": 383508480
+    },
+    "Operations": [
+      [
+        {
+          "id": 0,
+          "operation": "Result",
+          "expressions": [
+            "CUSTOMER.C_NAME",
+            "CUSTOMER.C_CUSTKEY",
+            "ORDERS.O_ORDERKEY",
+            "ORDERS.O_ORDERDATE",
+            "ORDERS.O_TOTALPRICE",
+            "SUM(SUM_INTERNAL(SUM(LINEITEM.L_QUANTITY), COUNT(*)))"
+          ]
+        },
+        {
+          "id": 1,
+          "operation": "Sort",
+          "expressions": [
+            "ORDERS.O_TOTALPRICE DESC NULLS FIRST",
+            "ORDERS.O_ORDERDATE ASC NULLS LAST"
+          ],
+          "parentOperators": [
+            0
+          ]
+        },
+        {
+          "id": 2,
+          "operation": "Aggregate",
+          "expressions": [
+            "aggExprs: [SUM(SUM_INTERNAL(SUM(LINEITEM.L_QUANTITY), COUNT(*)))]",
+            "groupKeys: [CUSTOMER.C_NAME, CUSTOMER.C_CUSTKEY, ORDERS.O_ORDERKEY, ORDERS.O_ORDERDATE, ORDERS.O_TOTALPRICE]"
+          ],
+          "parentOperators": [
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "operation": "Aggregate",
+          "expressions": [
+            "aggExprs: [SUM_INTERNAL(SUM(LINEITEM.L_QUANTITY), COUNT(*))]",
+            "groupKeys: [CUSTOMER.C_NAME, CUSTOMER.C_CUSTKEY, ORDERS.O_ORDERKEY, ORDERS.O_ORDERDATE, ORDERS.O_TOTALPRICE]"
+          ],
+          "parentOperators": [
+            2
+          ]
+        },
+        {
+          "id": 4,
+          "operation": "InnerJoin",
+          "expressions": [
+            "joinKey: (ORDERS.O_ORDERKEY = LINEITEM.L_ORDERKEY)"
+          ],
+          "parentOperators": [
+            3
+          ]
+        },
+        {
+          "id": 5,
+          "operation": "Aggregate",
+          "expressions": [
+            "aggExprs: [COUNT(*)]",
+            "groupKeys: [ORDERS.O_ORDERKEY, ORDERS.O_TOTALPRICE, ORDERS.O_ORDERDATE, CUSTOMER.C_CUSTKEY, CUSTOMER.C_NAME]"
+          ],
+          "parentOperators": [
+            4
+          ]
+        },
+        {
+          "id": 6,
+          "operation": "InnerJoin",
+          "expressions": [
+            "joinKey: (ORDERS.O_CUSTKEY = CUSTOMER.C_CUSTKEY)"
+          ],
+          "parentOperators": [
+            5
+          ]
+        },
+        {
+          "id": 7,
+          "operation": "InnerJoin",
+          "expressions": [
+            "joinKey: (LINEITEM.L_ORDERKEY = ORDERS.O_ORDERKEY)"
+          ],
+          "parentOperators": [
+            6
+          ]
+        },
+        {
+          "id": 8,
+          "operation": "Filter",
+          "expressions": [
+            "(SUM(LINEITEM.L_QUANTITY)) > 200"
+          ],
+          "parentOperators": [
+            7
+          ]
+        },
+        {
+          "id": 9,
+          "operation": "Aggregate",
+          "expressions": [
+            "aggExprs: [SUM(LINEITEM.L_QUANTITY)]",
+            "groupKeys: [LINEITEM.L_ORDERKEY]"
+          ],
+          "parentOperators": [
+            8
+          ]
+        },
+        {
+          "id": 10,
+          "operation": "TableScan",
+          "objects": [
+            "SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.LINEITEM"
+          ],
+          "expressions": [
+            "L_ORDERKEY",
+            "L_QUANTITY"
+          ],
+          "partitionsAssigned": 10,
+          "partitionsTotal": 10,
+          "bytesAssigned": 165228544,
+          "parentOperators": [
+            9
+          ]
+        },
+        {
+          "id": 11,
+          "operation": "JoinFilter",
+          "expressions": [
+            "joinKey: (LINEITEM.L_ORDERKEY = ORDERS.O_ORDERKEY)"
+          ],
+          "parentOperators": [
+            7
+          ]
+        },
+        {
+          "id": 12,
+          "operation": "TableScan",
+          "objects": [
+            "SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.ORDERS"
+          ],
+          "expressions": [
+            "O_ORDERKEY",
+            "O_CUSTKEY",
+            "O_TOTALPRICE",
+            "O_ORDERDATE"
+          ],
+          "partitionsAssigned": 10,
+          "partitionsTotal": 10,
+          "bytesAssigned": 42303488,
+          "parentOperators": [
+            11
+          ]
+        },
+        {
+          "id": 13,
+          "operation": "JoinFilter",
+          "expressions": [
+            "joinKey: (ORDERS.O_CUSTKEY = CUSTOMER.C_CUSTKEY)"
+          ],
+          "parentOperators": [
+            6
+          ]
+        },
+        {
+          "id": 14,
+          "operation": "TableScan",
+          "objects": [
+            "SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.CUSTOMER"
+          ],
+          "expressions": [
+            "C_CUSTKEY",
+            "C_NAME"
+          ],
+          "partitionsAssigned": 3,
+          "partitionsTotal": 3,
+          "bytesAssigned": 10747904,
+          "parentOperators": [
+            13
+          ]
+        },
+        {
+          "id": 15,
+          "operation": "Aggregate",
+          "expressions": [
+            "aggExprs: [SUM(LINEITEM.L_QUANTITY)]",
+            "groupKeys: [LINEITEM.L_ORDERKEY]"
+          ],
+          "parentOperators": [
+            4
+          ]
+        },
+        {
+          "id": 16,
+          "operation": "JoinFilter",
+          "expressions": [
+            "joinKey: (ORDERS.O_ORDERKEY = LINEITEM.L_ORDERKEY)"
+          ],
+          "parentOperators": [
+            15
+          ]
+        },
+        {
+          "id": 17,
+          "operation": "TableScan",
+          "objects": [
+            "SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.LINEITEM"
+          ],
+          "expressions": [
+            "L_ORDERKEY",
+            "L_QUANTITY"
+          ],
+          "partitionsAssigned": 10,
+          "partitionsTotal": 10,
+          "bytesAssigned": 165228544,
+          "parentOperators": [
+            16
+          ]
+        }
+      ]
+    ]
+  }
+  
