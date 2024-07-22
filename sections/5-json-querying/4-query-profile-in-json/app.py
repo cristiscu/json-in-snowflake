@@ -65,7 +65,7 @@ def getDot(results):
 st.title("Custom Query Profile")
 
 # change nameX alias to something unique, to avoid the query cache!
-query = """select c_name as name1, c_custkey, o_orderkey, o_orderdate, o_totalprice, sum(l_quantity)
+query = """select c_name as name99, c_custkey, o_orderkey, o_orderdate, o_totalprice, sum(l_quantity)
 from SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.customer
     inner join SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.orders on c_custkey = o_custkey
     inner join SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.lineitem on o_orderkey = l_orderkey
