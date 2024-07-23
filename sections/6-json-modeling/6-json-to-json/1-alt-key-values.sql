@@ -48,4 +48,5 @@ select object_construct('Properties', object_agg("Name", "Value")) as json
 select rs.value['Name'] as "Name", rs.value['Value'] as "Value"
   from (
 select parse_json(column1) as src
-  from values ($json)) src, lateral flatten(input => src:"Properties") rs);
+  from values ($json)) src,
+    lateral flatten(input => src:"Properties") rs);

@@ -24,7 +24,7 @@ from employees_json h,
 
 -- visual hierarchy links --> paste to http://magjac.com/graphviz-visual-editor/
 select distinct
-    '"' || e.this:name || '" -> "' || s.value:name || '"'
+    '"' || e.this:name || '" -> "' || s.value:name || '"' as link
 from employees_json h,
     table(flatten(h.v, recursive=>true)) e,
     table(flatten(e.this:employees)) s;

@@ -21,6 +21,7 @@ from employees_json h,
     table(flatten(e.this:employees)) s;
 table manager_subordinates;
 
+-- final RECURSIVE (!) query
 with recursive pairs as (
     select manager, subordinate,
         manager || '.' || subordinate as ms
