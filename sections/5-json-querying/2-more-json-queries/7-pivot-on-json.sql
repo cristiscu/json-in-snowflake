@@ -35,7 +35,7 @@ select * from (
         st.v:parent_id::varchar as parent_id,
         data.value:id::varchar as id,
         upper(vals.value: name::varchar) as col_name,
-        vals.value: value::varchar as col_value
+        vals.value:value::varchar as col_value
     from pivot_table st,
         lateral flatten(input => v:data) data,
         lateral flatten(input => data.value:values) vals)
