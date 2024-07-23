@@ -1,4 +1,4 @@
--- join books with tags
+-- Join books with tags
 -- see https://stackoverflow.com/questions/63034975/how-to-join-array-with-string-in-snowflake
 use schema test.public;
 
@@ -16,6 +16,18 @@ as select * from values
     (3, 'drama'), 
     (4, 'sf'), 
     (5, 'romance');
+
+/*
+Desired Output:
+
+TITLE	    TAG_IDS	                        ID	TAG_ID
+-------------------------------------------------------
+Bandits	    ["good"]	                    1	good
+Moby Dick	["good","adventure","drama"]	3	drama
+Moby Dick	["good","adventure","drama"]	1	good
+Sara	    ["bad","drama"]	                2	bad
+Sara	    ["bad","drama"]	                3	drama
+*/
 
 -- w/ ARRAY_CONTAINS
 select *
