@@ -23,6 +23,13 @@ from values
     (3, 'TV3', '{"URL": "www.url3.com", "Icon": "some_icon3", "Twitter": "Twitter_URL"}');
 table social_media;
 
+SELECT id, name,
+    value:URL::varchar as url,
+    value:Icon::varchar as icon,
+    value:Facebook::varchar as facebook,
+    value:Twitter::varchar as twitter
+FROM social_media;
+
 create or replace view social_media_view
 as SELECT id, name,
     value:URL::varchar as url,
