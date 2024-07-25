@@ -1,7 +1,7 @@
 -- Rows to JSON Aggregation
 
 /*
-Expected Output: per Market Segment  Customer Name : Phone
+Expected Output: per Market Segment --> Customer Name: Phone
 {
   "Market Segment": "AUTOMOBILE",
   "Customers": {
@@ -19,9 +19,9 @@ Expected Output: per Market Segment  Customer Name : Phone
 
 -- Query:
 select object_construct(
-  'Market Segment', c_mktsegment,
-  'Customers', object_agg(c_name, to_variant(c_phone)))
-  from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
-  group by c_mktsegment
-  order by c_mktsegment;
+    'Market Segment', c_mktsegment,
+    'Customers', object_agg(c_name, to_variant(c_phone)))
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+group by c_mktsegment
+order by c_mktsegment;
 
