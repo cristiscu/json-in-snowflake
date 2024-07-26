@@ -1,5 +1,5 @@
 -- create table desserts w/ embedded toppings using higher-order functions
-using test.public;
+use schema test.public;
 
 -- w/ embedded toppings ARRAY, as they are
 create or replace table desserts1 as

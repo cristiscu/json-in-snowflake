@@ -1,7 +1,5 @@
 -- JSON w/ recursive nested ARRAYs (unknown tree depth!)
-using test.public;
-
-select * from employees_json;
+use schema test.public;
 
 -- get all parent-child relationships, w/ recursive CTE
 with recursive cte as (

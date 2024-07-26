@@ -1,5 +1,5 @@
 -- full JSON doc to relational tables
-using test.public;
+use schema test.public;
 
 -- create table desserts
 create or replace table desserts as

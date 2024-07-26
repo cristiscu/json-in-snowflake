@@ -1,7 +1,7 @@
 -- manually upload employees.csv, projects.csv and employee_projects.csv into new test.emps schema
 use schema test.emps;
 
-select e.*. m.*
+select e.*, m.*
 from employees e join employees m on e.manager_id = m.employee_id;
 
 -- add manager column

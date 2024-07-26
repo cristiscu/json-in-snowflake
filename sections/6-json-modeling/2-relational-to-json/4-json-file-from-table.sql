@@ -1,4 +1,5 @@
 -- see https://docs.snowflake.com/en/user-guide/data-unload-considerations#unloading-a-relational-table-to-json
+use schema test.public;
 
 -- create a table
 CREATE OR REPLACE TABLE mytable (
@@ -15,14 +16,14 @@ INSERT INTO mytable VALUES
     (3,'Kibo','Horton','Columbus','GA');
 
 -- unload the data to a file in a stage
-COPY INTO @mystage
+COPY INTO @stage
     FROM (SELECT OBJECT_CONSTRUCT(
         'id', id, 
         'first_name', first_name, 
         'last_name', last_name, 
         'city', city, 
         'state', state) FROM mytable)
-    FILE_FORMAT = (TYPE = JSON);
+    FILE_FORMAT = (TYPE=JSON);
 
 /*
 COPY INTO statement creates a file named data_0_0_0.json.gz in the stage, w/ following data:
