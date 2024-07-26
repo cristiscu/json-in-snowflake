@@ -1,4 +1,4 @@
--- view w/ top JSON props (using JSON dot notation!)
+-- JSON w/ nested OBJECT
 -- see https://stackoverflow.com/questions/69754397/how-can-i-extract-a-json-column-into-new-columns-automatically-in-snowflake-sql
 use schema test.public;
 
@@ -17,16 +17,14 @@ id  name  url           icon            facebook      twitter
 */
 create or replace table social_media(id int, name string, value variant)
 as select $1, $2, parse_json($3) from values
-(1, 'TV1', '{"URL": "www.url1.com", "Icon": "some_icon1"}'),
-(2, 'TV2', '{"URL": "www.url2.com", "Icon": "some_icon2", "Facebook": "Facebook_URL"}'),
-(3, 'TV3', '{"URL": "www.url3.com", "Icon": "some_icon3", "Twitter": "Twitter_URL"}');
+    (1, 'TV1', '{"URL": "www.url1.com", "Icon": "some_icon1"}'),
+    (2, 'TV2', '{"URL": "www.url2.com", "Icon": "some_icon2", "Facebook": "Facebook_URL"}'),
+    (3, 'TV3', '{"URL": "www.url3.com", "Icon": "some_icon3", "Twitter": "Twitter_URL"}');
 select * from social_media;
 
-create or replace view social_media_view
-as SELECT id, name,
+SELECT id, name,
     value:URL::varchar as url,
     value:Icon::varchar as icon,
     value:Facebook::varchar as facebook,
     value:Twitter::varchar as twitter
 FROM social_media;
-select * from social_media_view;

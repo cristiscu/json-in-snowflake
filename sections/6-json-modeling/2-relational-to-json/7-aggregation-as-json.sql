@@ -17,11 +17,18 @@ Expected Output: per Market Segment --> Customer Name: Phone
 }
 */
 
--- Query:
+select c_mktsegment, c_name, c_phone
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+order by c_mktsegment;
+
+select c_mktsegment, object_agg(c_name, to_variant(c_phone))
+from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
+group by c_mktsegment
+order by c_mktsegment;
+
 select object_construct(
     'Market Segment', c_mktsegment,
     'Customers', object_agg(c_name, to_variant(c_phone)))
 from "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."CUSTOMER"
 group by c_mktsegment
 order by c_mktsegment;
-

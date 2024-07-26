@@ -2,7 +2,7 @@
 use schema test.public;
 
 -- CREATE OR REPLACE TABLE store(v VARIANT);
--- COPY INTO store FROM @temp_stage;
+-- COPY INTO store FROM @stage1;
 -- TABLE store;
 
 select $1:store.book

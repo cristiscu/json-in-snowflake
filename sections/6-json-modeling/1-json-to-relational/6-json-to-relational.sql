@@ -1,6 +1,5 @@
+-- full JSON doc to relational tables
 using test.public;
-
-table desserts_json;
 
 -- create table desserts
 create or replace table desserts as

@@ -15,9 +15,9 @@ from persons p
 
 -- create view over this
 create or replace view addresses_view
-as select p.name, cv.children
+as select p.name, cv.children,
     OBJECT_CONSTRUCT('country', a.country, 'city', a.city) address
 from persons p
-    left join children_view cv on p.name = cv.name
+    left join children_view cv on p.name = cv.parent
     left join addresses a on p.id = a.id_person;
-table children_view;
+table addresses_view;

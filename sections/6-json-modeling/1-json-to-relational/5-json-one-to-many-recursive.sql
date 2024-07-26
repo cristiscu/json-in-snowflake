@@ -1,4 +1,4 @@
--- we have some JSON w/ recursive objects (unknown tree depth!)
+-- JSON w/ recursive nested ARRAYs (unknown tree depth!)
 using test.public;
 
 select * from employees_json;

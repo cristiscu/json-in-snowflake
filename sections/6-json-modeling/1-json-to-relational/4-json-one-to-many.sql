@@ -1,5 +1,5 @@
--- we have some JSON w/ recursive objects (unknown tree depth!)
-using test.public;
+-- JSON w/ nested ARRAY
+use schema test.public;
 
 -- select first book
 select v:store.book[0]

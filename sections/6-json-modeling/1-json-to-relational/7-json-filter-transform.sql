@@ -1,4 +1,4 @@
--- create table desserts w/ embedded toppings
+-- create table desserts w/ embedded toppings using higher-order functions
 using test.public;
 
 -- w/ embedded toppings ARRAY, as they are
