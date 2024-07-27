@@ -2,7 +2,7 @@
 
 All source code for my new **JSON in Snowflake Masterclass Hands-On** Udemy course.
 
-[![Promo Clip](.images/logo.png)](https://youtu.be/H4oT7P6vmKk)
+[![Promo Clip](.images/logo.png)](https://youtu.be/rmVGB6rt170)
 
 ## Current Project Setup
 
