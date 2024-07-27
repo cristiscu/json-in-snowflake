@@ -1,3 +1,5 @@
+# see https://www.w3schools.com/python/python_json.asp
+
 s = """
 {
     "store": {

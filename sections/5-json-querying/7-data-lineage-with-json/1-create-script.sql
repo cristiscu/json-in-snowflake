@@ -1,3 +1,5 @@
+-- see https://medium.com/snowflake/how-to-visualize-the-data-lineage-graph-in-snowflake-f0a356046380
+
 -- create test database and schema (run this script and wait for 1-2 hours to propagate!)
 -- [object_modified_by_ddl]
 create or replace database lineage_db;

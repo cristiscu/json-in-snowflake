@@ -1,4 +1,5 @@
 -- with ARRAY_SIZE(ARRAY_UNIQUE_AGG(expr))
+-- see https://docs.snowflake.com/en/user-guide/querying-arrays-for-distinct-counts
 use schema SNOWFLAKE_SAMPLE_DATA.TPCH_SF1000;
 
 -- 34 seconds

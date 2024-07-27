@@ -1,3 +1,4 @@
+# see https://docs.streamlit.io/develop/api-reference/data/st.json
 import json
 import streamlit as st
 from io import StringIO

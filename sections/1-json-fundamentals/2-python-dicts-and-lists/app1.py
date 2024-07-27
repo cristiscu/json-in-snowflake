@@ -1,3 +1,6 @@
+# see https://www.w3schools.com/python/python_dictionaries.asp
+# see https://www.w3schools.com/python/python_lists.asp
+
 data = {
     "store": {
         "book": [ 
