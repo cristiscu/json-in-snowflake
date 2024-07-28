@@ -1,6 +1,6 @@
 # JSON in Snowflake
 
-All source code for my new **JSON in Snowflake Masterclass Hands-On** Udemy course.
+All source code for my new [**JSON in Snowflake Masterclass Hands-On**](https://www.udemy.com/course/json-in-snowflake/) Udemy course.
 
 [![Promo Clip](.images/logo.png)](https://youtu.be/rmVGB6rt170)
 
